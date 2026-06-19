@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abegail Mercado — Virtual Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF8;
+    --ink:#15241F;
+    --sage:#3D6B5C;
+    --brass:#C7A56B;
+    --gray:#8A8F8A;
+    --line: rgba(21,36,31,0.12);
+    --card:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+
+  /* ===== TICK DIVIDER ===== */
+  .ticks{
+    height:18px;
+    background-image: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 24px);
+    opacity:0.7;
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,250,248,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:30px;
+    letter-spacing:-0.01em;
+  }
+  .brand span{color:var(--sage);}
+  .navlinks{display:flex; gap:36px; font-size:14px; font-weight:500;}
+  .navlinks a{color:var(--gray); transition:color .2s;}
+  .navlinks a:hover{color:var(--ink);}
+  .nav-cta{
+    border:1px solid var(--ink);
+    padding:9px 18px;
+    border-radius:2px;
+    font-size:13px;
+    font-weight:600;
+    transition:all .25s;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--bg);}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:96px 0 80px;
+    position:relative;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:64px;
+    align-items:start;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:7px;height:7px;
+    background:var(--sage);
+    border-radius:50%;
+    display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(40px, 5.2vw, 64px);
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    margin-bottom:26px;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--sage);
+    font-weight:500;
+  }
+  .hero-sub{
+    font-size:18px;
+    line-height:1.65;
+    color:#3a423f;
+    max-width:480px;
+    margin-bottom:36px;
+  }
+  .hero-actions{display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--ink);
+    color:var(--bg);
+    padding:14px 26px;
+    border-radius:2px;
+    font-size:14px;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .25s, background .25s;
+  }
+  .btn-primary:hover{background:var(--sage); transform:translateY(-2px);}
+  .btn-ghost{
+    color:var(--ink);
+    font-size:14px;
+    font-weight:600;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:2px;
+    transition:color .2s, border-color .2s;
+  }
+  .btn-ghost:hover{color:var(--sage); border-color:var(--sage);}
+
+  /* ===== SPEC TAG (signature element) ===== */
+  .spec-tag{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:28px;
+    position:relative;
+    box-shadow: 0 1px 2px rgba(21,36,31,0.04);
+  }
+  .spec-tag::before{
+    content:'';
+    position:absolute;
+    top:-1px; left:24px;
+    width:14px;height:14px;
+    background:var(--card);
+    border-left:1px solid var(--line);
+    border-top:1px solid var(--line);
+    border-radius:50%;
+    transform:translateY(-50%);
+  }
+  .tag-head{
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px dashed var(--line);
+    padding-bottom:14px;
+    margin-bottom:18px;
+  }
+  .tag-head .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--gray);
+    text-transform:uppercase;
+  }
+  .stamp{
+    border:1.5px solid var(--brass);
+    color:var(--brass);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    padding:4px 10px;
+    border-radius:20px;
+    text-transform:uppercase;
+  }
+  .spec-row{
+    display:flex; justify-content:space-between;
+    padding:11px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .spec-row:last-child{border-bottom:none;}
+  .spec-row .k{color:var(--gray);}
+  .spec-row .v{font-weight:600; text-align:right; font-family:'JetBrains Mono',monospace; font-size:13px;}
+
+  /* ===== SECTION HEADER (shared) ===== */
+  .section{padding:88px 0;}
+  .section-head{margin-bottom:48px; max-width:640px;}
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:14px;
+    display:block;
+  }
+  .section h2{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(28px,3.4vw,38px);
+    letter-spacing:-0.01em;
+    line-height:1.15;
+  }
+  .section-desc{
+    margin-top:16px;
+    color:#3a423f;
+    font-size:16px;
+    line-height:1.65;
+  }
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-grid{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:64px;
+  }
+  .about-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:8px;
+  }
+  .stat{
+    background:var(--card);
+    padding:24px 20px;
+  }
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-size:34px;
+    color:var(--sage);
+    line-height:1;
+  }
+  .stat .lbl{
+    font-size:12.5px;
+    color:var(--gray);
+    margin-top:8px;
+    line-height:1.4;
+  }
+  .about-body p{
+    font-size:16px;
+    line-height:1.75;
+    color:#2b332f;
+    margin-bottom:18px;
+  }
+  .about-body p:last-child{margin-bottom:0;}
+  .about-body strong{color:var(--ink); font-weight:600;}
+
+  /* ===== EXPERIENCE — traceability ledger ===== */
+  .ledger{border-top:1px solid var(--line);}
+  .ledger-item{
+    display:grid;
+    grid-template-columns: 200px 1fr;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .ledger-item:first-child{padding-top:0;}
+  .ledger-period{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--gray);
+    padding-top:4px;
+  }
+  .ledger-period .yrs{
+    display:block;
+    color:var(--brass);
+    font-size:11px;
+    margin-top:6px;
+    letter-spacing:0.04em;
+  }
+  .ledger-role{
+    font-family:'Fraunces',serif;
+    font-size:21px;
+    font-weight:500;
+    margin-bottom:4px;
+  }
+  .ledger-co{
+    color:var(--sage);
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .ledger-co span{color:var(--gray); font-weight:400;}
+  .ledger-points{list-style:none;}
+  .ledger-points li{
+    font-size:15px;
+    line-height:1.65;
+    color:#3a423f;
+    padding-left:18px;
+    position:relative;
+    margin-bottom:8px;
+  }
+  .ledger-points li::before{
+    content:'';
+    position:absolute;
+    left:0; top:9px;
+    width:6px;height:1.5px;
+    background:var(--brass);
+  }
+
+  /* ===== SERVICES ===== */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .svc{
+    background:var(--card);
+    padding:32px 26px;
+    transition:background .25s;
+  }
+  .svc:hover{background:#F4F2EC;}
+  .svc-mark{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--brass);
+    margin-bottom:18px;
+    letter-spacing:0.05em;
+  }
+  .svc h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:19px;
+    margin-bottom:10px;
+  }
+  .svc p{
+    font-size:14px;
+    line-height:1.6;
+    color:var(--gray);
+  }
+
+  /* ===== TOOLS ===== */
+  .tools-row{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:8px;
+  }
+  .tool-chip{
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:9px 16px;
+    border-radius:20px;
+    font-size:13.5px;
+    font-weight:500;
+    display:flex; align-items:center; gap:8px;
+  }
+  .tool-chip.trained::after{
+    content:'TRAINED';
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;
+    color:var(--brass);
+    border:1px solid var(--brass);
+    padding:2px 6px;
+    border-radius:10px;
+    letter-spacing:0.03em;
+  }
+  .tool-chip.dot::before{
+    content:'';
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--sage);
+  }
+
+  /* ===== CERT BAND ===== */
+  .cert{
+    background:var(--ink);
+    color:var(--bg);
+  }
+  .cert .wrap{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:36px;
+    align-items:center;
+    padding:48px 32px;
+  }
+  .cert-icon{
+    width:56px;height:56px;
+    border:1.5px solid var(--brass);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .cert-icon svg{width:26px;height:26px;}
+  .cert-title{
+    font-family:'Fraunces',serif;
+    font-size:21px;
+    margin-bottom:6px;
+  }
+  .cert-sub{
+    font-size:14px;
+    color:rgba(250,250,248,0.65);
+    line-height:1.6;
+  }
+  .cert-date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--brass);
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact{text-align:center;}
+  .contact h2{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(32px,4.5vw,48px);
+    letter-spacing:-0.02em;
+    max-width:680px;
+    margin:0 auto 20px;
+    line-height:1.15;
+  }
+  .contact h2 em{color:var(--sage); font-style:italic;}
+  .contact-sub{
+    color:var(--gray);
+    font-size:16px;
+    max-width:480px;
+    margin:0 auto 40px;
+    line-height:1.6;
+  }
+  .contact-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    max-width:680px;
+    margin:0 auto;
+  }
+  .ccard{
+    background:var(--card);
+    padding:26px 18px;
+    text-align:center;
+    transition:background .2s;
+  }
+  .ccard:hover{background:#F4F2EC;}
+  .ccard .ico{font-size:20px; margin-bottom:10px;}
+  .ccard .lbl{font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;}
+  .ccard .val{font-size:13.5px; font-weight:600; word-break:break-word;}
+
+  footer{
+    padding:36px 0;
+    text-align:center;
+    font-size:13px;
+    color:var(--gray);
+    border-top:1px solid var(--line);
+  }
+  footer .brand-mini{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    font-weight:500;
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.show{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr; gap:40px;}
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .services-grid{grid-template-columns:1fr;}
+    .ledger-item{grid-template-columns:1fr; gap:8px;}
+    .navlinks{display:none;}
+    .cert .wrap{grid-template-columns:1fr; text-align:center; padding:40px 24px;}
+    .cert-date{text-align:center;}
+    .contact-cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">AbeX <span>Virtual Solutions</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Let's talk</a>
+  </div>
+</nav>
+
+<div class="ticks"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Available for new clients</div>
+      <h1>Precision-built<br>support, <em>made<br>remote.</em></h1>
+      <p class="hero-sub">I'm Abegail Mercado — a General Virtual Assistant with 10+ years of zero-error discipline from international manufacturing floors, now applied to inboxes, calendars, and client operations.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start a project →</a>
+        <a href="#experience" class="btn-ghost">View experience</a>
+      </div>
+    </div>
+
+    <div class="spec-tag">
+      <div class="tag-head">
+        <span class="label">Service Spec Sheet</span>
+        <span class="stamp">✓ Verified</span>
+      </div>
+      <div class="spec-row"><span class="k">Role</span><span class="v">General VA</span></div>
+      <div class="spec-row"><span class="k">Experience</span><span class="v">10+ Years</span></div>
+      <div class="spec-row"><span class="k">Background</span><span class="v">QC / Manufacturing</span></div>
+      <div class="spec-row"><span class="k">Certified</span><span class="v">Dec 2025</span></div>
+      <div class="spec-row"><span class="k">Time Zone</span><span class="v">GMT+8 (PH)</span></div>
+      <div class="spec-row"><span class="k">Availability</span><span class="v">Flexible / UK-US hrs</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap section">
+    <div class="about-grid">
+      <div class="reveal">
+        <span class="section-eyebrow">001 — Background</span>
+        <h2>Built on the floor.<br>Applied to the inbox.</h2>
+        <div class="about-stats">
+          <div class="stat"><div class="num">3</div><div class="lbl">Countries worked in<br>(PH · MY · KR)</div></div>
+          <div class="stat"><div class="num">100%</div><div class="lbl">Documentation<br>traceability standard</div></div>
+        </div>
+      </div>
+      <div class="about-body reveal">
+        <p>For over a decade, my job was to make sure nothing slipped through — measuring tolerances, logging defects, and reporting accurately to engineering teams across cultures and time zones. <strong>That discipline doesn't disappear when the work moves online.</strong></p>
+        <p>I made a deliberate shift into virtual assistance to bring that same standard to business owners who need someone reliable behind the scenes — managing inboxes, calendars, documentation, and the small details that keep operations running smoothly.</p>
+        <p>I hold a <strong>BS in Electronics &amp; Communications Engineering</strong> and completed formal General VA training in December 2025. I don't cut corners, and I don't need to be supervised to get things right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">002 — Track Record</span>
+      <h2>A decade of documented reliability</h2>
+      <p class="section-desc">Real roles, real responsibility — reframed for what they actually demonstrate.</p>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-item reveal">
+        <div class="ledger-period">Nov 2016 – Dec 2019<span class="yrs">3 YRS · SOUTH KOREA</span></div>
+        <div>
+          <div class="ledger-role">Machine Operator</div>
+          <div class="ledger-co">Joongang Industrial <span>— Gyeonggi-do, South Korea</span></div>
+          <ul class="ledger-points">
+            <li>Maintained precision production records with full traceability — zero tolerance for documentation error.</li>
+            <li>Flagged and resolved quality defects via structured reporting and escalation.</li>
+            <li>Collaborated daily across a language barrier, building cross-cultural communication discipline.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ledger-item reveal">
+        <div class="ledger-period">Nov 2013 – Nov 2014<span class="yrs">1 YR · MALAYSIA</span></div>
+        <div>
+          <div class="ledger-role">Quality Control Technician</div>
+          <div class="ledger-co">Panasonic Energy Malaysia <span>— Kulim, Malaysia</span></div>
+          <ul class="ledger-points">
+            <li>Owned daily &amp; weekly quality reporting distributed across departments — always on time, always accurate.</li>
+            <li>Tracked CAPA follow-ups end-to-end, coordinating directly with engineering teams.</li>
+            <li>Maintained audit-ready equipment logs under compliance standards.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ledger-item reveal">
+        <div class="ledger-period">Jul 2008 – Oct 2012<span class="yrs">4 YRS · PHILIPPINES</span></div>
+        <div>
+          <div class="ledger-role">Production Technician</div>
+          <div class="ledger-co">Sunpower Philippines Manufacturing <span>— Batangas, PH</span></div>
+          <ul class="ledger-points">
+            <li>Monitored multiple live process parameters simultaneously without error.</li>
+            <li>Documented anomalies into structured reports supporting engineering decisions.</li>
+            <li>Drove continuous improvement through metric tracking and proactive recommendations.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">003 — What I Handle</span>
+      <h2>Where I take work off your plate</h2>
+    </div>
+
+    <div class="services-grid reveal">
+      <div class="svc">
+        <div class="svc-mark">/ 01</div>
+        <h3>Inbox &amp; Calendar</h3>
+        <p>Email management, scheduling, and calendar upkeep so nothing gets missed or double-booked.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-mark">/ 02</div>
+        <h3>Data &amp; Documentation</h3>
+        <p>Accurate data entry, structured record-keeping, and report preparation — built on a zero-error standard.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-mark">/ 03</div>
+        <h3>Admin Support</h3>
+        <p>Day-to-day administrative tasks, follow-ups, and coordination across your team or vendors.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-mark">/ 04</div>
+        <h3>Task &amp; Workflow Tracking</h3>
+        <p>Keeping projects visible and on schedule, with proactive status updates — no chasing required.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-mark">/ 05</div>
+        <h3>CRM &amp; CMS Support</h3>
+        <p>Trained in CRM and CMS fundamentals to help keep client and content systems organized.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-mark">/ 06</div>
+        <h3>Research &amp; Reporting</h3>
+        <p>Structured research summaries and clear reporting, formatted the way your team actually reads.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap reveal">
+    <span class="section-eyebrow">004 — Tools</span>
+    <h2 style="margin-bottom:24px;">Comfortable across the stack</h2>
+    <div class="tools-row">
+      <span class="tool-chip dot">Google Workspace</span>
+      <span class="tool-chip dot">Microsoft Office</span>
+      <span class="tool-chip dot">Gmail</span>
+      <span class="tool-chip dot">Zoom</span>
+      <span class="tool-chip dot">Canva</span>
+      <span class="tool-chip trained">CRM Systems</span>
+      <span class="tool-chip trained">CMS Platforms</span>
+      <span class="tool-chip">Trello</span>
+      <span class="tool-chip">Slack</span>
+      <span class="tool-chip">Asana</span>
+      <span class="tool-chip">ClickUp</span>
+      <span class="tool-chip">Notion</span>
+    </div>
+  </div>
+</section>
+
+<!-- CERT BAND -->
+<section class="cert">
+  <div class="wrap">
+    <div class="cert-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C7A56B" stroke-width="1.5"><path d="M12 2l2.4 4.86L20 7.6l-4 3.9.94 5.5L12 14.7l-4.94 2.3L8 11.5l-4-3.9 5.6-.74L12 2z" stroke-linejoin="round"/></svg>
+    </div>
+    <div>
+      <div class="cert-title">General Virtual Assistant Training — Certified</div>
+      <div class="cert-sub">Freelance Academy · 15-hour program covering Email &amp; Calendar Management, Documentation, CRM/CMS Overview, and Project Management Fundamentals</div>
+    </div>
+    <div class="cert-date">DEC 2025</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="wrap reveal">
+    <span class="section-eyebrow">005 — Get In Touch</span>
+    <h2>Let's bring <em>industrial-grade<br>reliability</em> to your business.</h2>
+    <p class="contact-sub">Currently accepting new clients. I respond within 24 hours.</p>
+
+    <div class="contact-cards">
+      <a href="mailto:mercado.abegail@gmail.com" class="ccard">
+        <div class="ico">✉</div>
+        <div class="lbl">Email</div>
+        <div class="val">mercado.abegail@gmail.com</div>
+      </a>
+      <a href="tel:+639339773749" class="ccard">
+        <div class="ico">☎</div>
+        <div class="lbl">Phone</div>
+        <div class="val">+63 966 977 3749</div>
+      </a>
+      <div class="ccard">
+        <div class="ico">📍</div>
+        <div class="lbl">Location</div>
+        <div class="val">Lucena City, PH</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="brand-mini">AbeX Virtual Solutions</span> · Abegail Mercado — General Virtual Assistant
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+    });
+  },{threshold:0.12});
+  reveals.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
